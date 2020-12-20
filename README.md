@@ -5,7 +5,7 @@ Gadgets Charm is an e-commerce web application developed using Django
 ## NYP DSF1901 Year 1 Semester 1 Individual Web Development Assignment
 
 ### Description
-Gadgets Charm is simple e-commerce application, users are able to purchase items from the application.
+Gadgets Charm is a simple e-commerce application, users are able to purchase items from the application.
 Stripe API is integrated into the app to allow processing of credit card.
 
 ### Technologies:
