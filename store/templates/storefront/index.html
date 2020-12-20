@@ -1,0 +1,94 @@
+{% extends 'storefront/base.html' %}
+{% load static %}
+{% block css %}
+  <link href="{% static "storefront/css/index.css" %}" rel="stylesheet">
+{% endblock css %}
+{% block script %}
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+  <script src="{% static "storefront/js/index.js" %}" type="text/javascript"></script>
+{% endblock script %}
+{% block content %}
+  <nav class="mobile-index">
+    <a href="{% url 'storefront' %}"><i class="fas fa-home home-icon"></i></a>
+    <form class="search-form" action="/">
+      <div class="text-search">
+        <input type="text" class="search-mobile" placeholder="Search" name="search">
+        <button type="submit"><i class="fas fa-search"></i></button>
+      </div>
+    </form>
+    {% if user.is_authenticated %}
+      <div class="account-dropdown account-index">
+        <button class="account-btn btn">My account </button>
+        <button class="drop-account btn">
+          <div class="down-arrow"></div>
+        </button>
+        <div class="account-content">
+          <a class="account-set btn" href="{% url 'account-info' %}">
+            <i class="fas fa-cog account-icon"></i>Update Account Settings
+          </a>
+          <a class="logout-btn btn" href="{% url 'logout' %}">
+            <i class="fas fa-sign-out-alt account-icon"></i>Logout
+          </a>
+        </div>
+      </div>
+      <a href="{% url 'checkout-first' %}"><i class="fas fa-shopping-cart cart-icon"></i></a>
+    {% else %}
+      <a class="login-index" href="{% url 'login' %}">Login</a>
+      <a class="register-index" href="{% url 'register' %}">Sign up</a>
+    {% endif %}
+  </nav>
+  <div class="index-container">
+    <div class="banner-div">
+      <div class="cat-menu">
+        <span>Categories</span>
+        <div class="cat-child">
+          <i class="fas fa-mobile-alt fa-lg"></i>
+          <span>Phones & accessories</span>
+          <a style="color: #595959; text-decoration: none" href="/?search=&cat=1"></a>
+        </div>
+        <div class="cat-child">
+          <i class="fas fa-laptop fa-lg"></i>
+          <span>Computers & accessories</span>
+          <a style="color: #595959; text-decoration: none" href="/?search=&cat=2"></a>
+        </div>
+        <div class="cat-child">
+          <i class="fas fa-memory fa-lg"></i>
+          <span>Computer Hardware</span>
+          <a style="color: #595959; text-decoration: none" href="/?search=&cat=3"></a>
+        </div>
+      </div>
+      <div class="img-slideshow">
+        <div class="img-slides">
+          <img class="slide-img" src="{% static 'storefront/img/slideshow1.png' %}">
+        </div>
+        <div class="img-slides">
+          <img src="{% static 'storefront/img/slideshow2.png' %}" class="slide-img">
+        </div>
+        <div class="img-slides">
+          <img src="{% static 'storefront/img/slideshow3.png' %}" class="slide-img">
+        </div>
+        <div class="img-slides">
+          <img src="{% static 'storefront/img/slideshow4.png' %}" class="slide-img">
+        </div>
+      </div>
+      <div class="banner-bottom">
+        <div class="bottom-banner-div">
+          <img src="{% static 'storefront/img/banner-bottom.png' %}">
+        </div>
+      </div>
+    </div>
+    <span>All Items</span>
+    <div class="item-div">
+      {% for product in products %}
+      <div class="item-card">
+        <div class="img-thumb-wrapper">
+          <img class="img" alt="{{ product.item }} pic" src="{{ product.img1.url }}">
+        </div>
+        <span class="item-title">{{ product.item }}</span>
+        <span class="item-price">${{ product.unit_price }}</span>
+        <a style="color: #595959; text-decoration: none" href="{% url 'product-info' product.id %}"></a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock content %}

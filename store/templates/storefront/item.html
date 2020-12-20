@@ -1,0 +1,133 @@
+{% extends 'storefront/base.html' %}
+{% load static %}
+{% load store_tags %}
+{% block css %}
+  <link rel="stylesheet" href="{% static "storefront/css/item.css" %}">
+{% endblock css %}
+{% block script %}
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+  <script src="{% static "storefront/js/item.js" %}"></script>
+  <script src="{% static "storefront/js/store.js" %}"></script>
+{% endblock script %}
+{% block content %}
+  <nav class="item-nav">
+    <div class="item-greet">
+      {% if user.is_authenticated %}
+      <span>Hi! {{ user.first_name }} {{ user.last_name }} <a href="{% url 'logout' %}">Sign out</a></span>
+      {% else %}
+      <span>Hi! Please <a href="{% url 'login' %}">Login</a> or <a href="{% url 'register' %}">Sign up</a></span>
+      {% endif %}
+    </div>
+    <a class="home-item" href="{% url 'storefront' %}">Home</a>
+    <div class="nav-item-right">
+      <a class="cart-item">My cart</a>
+      {% if user.is_authenticated %}
+      <a class="account-item" href="{% url 'account-info' %}">My account</a>
+      {% endif %}
+    </div>
+  </nav>
+  <nav class="item-nav-mobile">
+    <a class="home-item" href="{% url 'storefront' %}">Home</a>
+      <a class="cart-item">My cart</a>
+      {% if user.is_authenticated %}
+      <a class="account-item" href="{% url 'account-info' %}">My account</a>
+      {% else %}
+        <a class="login-item" href="{% url 'login' %}">Login</a>
+        <a href="{% url 'register' %}" class="register-item">Sign Up</a>
+      {% endif %}
+  </nav>
+  <div class="item-container">
+    <div class="nav-item">
+      <span><a href="{% get_cat_url product.pk %}">{% get_cat_name product.pk %}</a> >> {{ product.item }}</span>
+    </div>
+    <div class="item-main">
+      <div class="item-gallery">
+        <div class="gallery-container" id="swipe-gallery">
+          <a class="prev mobile-item">&#10094;</a>
+          <div class="gallery-slide">
+            <img src="{{ product.img1.url }}">
+          </div>
+          {% if product.img2 %}
+          <div class="gallery-slide">
+            <img src="{{ product.img2.url }}">
+          </div>
+          {% endif %}
+          {% if product.img3 %}
+          <div class="gallery-slide">
+            <img src="{{ product.img3.url }}">
+          </div>
+          {% endif %}
+          {% if product.img4 %}
+          <div class="gallery-slide">
+            <img src="{{ product.img4.url }}">
+          </div>
+          {% endif %}
+          <a class="next mobile-item">&#10095;</a>
+        </div>
+        <div class="gallery-dots">
+          <span class="dot img1-dot"></span>
+          {% if product.img2 %}
+            <span class="dot img2-dot"></span>
+          {% endif %}
+          {% if product.img3 %}
+            <span class="dot img3-dot"></span>
+          {% endif %}
+          {% if product.img4 %}
+            <span class="dot img4-dot"></span>
+          {% endif %}
+        </div>
+      </div>
+      <div class="item-title">
+        <span>{{ product.item }}</span>
+      </div>
+      <div class="item-desc">
+        <div class="text-desc">
+          <span>{{ product.desc }}</span>
+        </div>
+        <div class="html-desc">
+          {{ product.html |safe }}
+        </div>
+      </div>
+      <div class="sidebar">
+        <div class="item-price">
+          <span>Price: ${{ product.unit_price }}</span>
+        </div>
+        <div class="shipping-model">
+          <div class="shipping-table-container">
+            <span class="close-shipping">&times;</span>
+            <table class="shiping-prices">
+              <caption>Shipping prices</caption>
+              <tr>
+                <th>Shipping method</th>
+                <th>Days to deliver</th>
+                <th>Price</th>
+              </tr>
+              <tr>
+                <td>Express</td>
+                <td>3 working days</td>
+                <td>$3</td>
+              </tr>
+              <tr>
+                <td>Economy</td>
+                <td>5 working days</td>
+                <td>$1.90</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <div class="cart-sidebar">
+          <span class="delivery">Delivered to you in 3 days</span>
+          <span class="shipping-table-toggle">Show shipping prices</span>
+          <span class="max-quantity"></span>
+          <div class="select-option">
+            <span>Qty:</span>
+          </div>
+          <div class="cart-buttons">
+            <button class="add-cart-btn" value="{{ product.pk }}"><i class="fas fa-plus"></i> Add to Cart</button>
+            <button class="buy-btn" value="{{ product.pk }}"><i class="fas fa-dollar-sign"></i> Buy now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

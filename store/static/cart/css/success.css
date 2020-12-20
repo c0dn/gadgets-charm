@@ -1,0 +1,34 @@
+.container {
+  display: grid;
+  grid-template-columns: [col1-start] 1fr [col1-end col2-start] 4fr [col2-end col3-start] 1fr [col3-end];
+  grid-template-rows: [row1-start] 100px [row1-end row2-start] minmax(700px, auto) [row2-end row3-start] minmax(50px, auto) [row3-end];
+  grid-template-areas:
+    "header header header"
+    "message-main message-main message-main"
+    "footer footer footer";
+}
+.message {
+  grid-area: message-main;
+}
+@media screen and (max-width: 600px) {
+  .container {
+    display: grid;
+    grid-template-columns: [col1-start] 1fr [col1-end col2-start] 4fr [col2-end col3-start] 1fr [col3-end];
+    grid-template-rows: [row1-start] 30px [row1-end row2-start] minmax(700px, auto) [row2-end row3-start] minmax(50px, auto) [row3-end];
+    grid-template-areas:
+      "header header header"
+      "message-main message-main message-main"
+      "footer footer footer";
+  }
+  .success-nav-mobile {
+    grid-area: header;
+    background-color: white;
+    display: inline-flex;
+    justify-content: space-around;
+  }
+  .success-nav-mobile > a {
+    color: blue;
+    text-decoration: none;
+    margin: auto;
+  }
+}

@@ -1,0 +1,337 @@
+.container {
+  display: grid;
+  gap: 30px;
+  grid-template-columns: [col1-start] 1fr [col1-end col2-start] 7fr [col2-end col3-start] 1fr [col3-end];
+  grid-template-rows: [row1-start] 100px [row1-end row2-start] minmax(600px, auto) [row2-end row3-start] minmax(50px, auto) [row3-end];
+  grid-template-areas: 
+    "header header header"
+    ". main ."
+    "footer footer footer";
+}
+.account-container {
+  grid-area: main;
+}
+.account-settings {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+.sidebar-account {
+  flex: 0 0 33.3333333333%;
+  max-width: 33.3333333333%;
+}
+.profile-box {
+  background: white;
+  border: 1px solid #ececec;
+  padding: 2.78571429em;
+  border-radius: 6px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 30px;
+}
+.box-top {
+  margin-bottom: 1.85714286em;
+  text-align: center;
+}
+.box-top > .round-account-img {
+  margin-bottom: 0.92857143em;
+  width: 90px;
+  height: 90px;
+  vertical-align: middle;
+  border-radius: 50%;
+  border: 1px black solid;
+}
+.box-top > .username-account {
+  font-family: "PT Sans", sans-serif;
+  display: block;
+  font-weight: 600;
+  font-size: 1em;
+  line-height: 1.85714286em;
+  color:black;
+}
+hr {
+  border-color: #ECECEC;
+  margin: 1.85714286em 0;
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  box-sizing: content-box;
+  height: 0;
+  overflow: visible;
+  display: block;
+  unicode-bidi: isolate;
+  margin-block-start: 0.5em;
+  margin-block-end: 0.5em;
+  margin-inline-start: auto;
+  margin-inline-end: auto;
+}
+.box-menu-container {
+  margin-bottom: 1.85714286em;
+}
+.box-menu-container > .box-menu {
+  list-style: none;
+  line-height: 1.85714286em;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 40px;
+}
+.box-menu > ul {
+  list-style: none;
+}
+.box-menu > ul a {
+  color: blue;
+}
+.account-main-container {
+  position: relative;
+  width: 100%;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+  flex: 0 0 66%;
+}
+.account-main-container > .main-box {
+  background: white;
+  border: 1px solid #ececec;
+  padding: 2.78571429em;
+  border-radius: 6px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 30px;
+}
+.account-main-container > .main-box h4 {
+  margin-bottom: 1.36842105263158em;
+  font-weight: 400;
+  font-size: 1.35714286em;
+  line-height: 1.36842105em;
+  color: #252525;
+}
+.account-main-container > .main-box > form {
+  max-width: 100%;
+  position: relative;
+}
+.col-md-6 {
+  margin-bottom: 0.92857143em;
+  flex: 0 0 50%;
+  position: relative;
+  width: 100%;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+  max-width: 50%;
+}
+.account-main-container > .main-box > form > div.fields {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+.account-settings label {
+  font-size: .85714286em;
+  color: black;
+  display: block;
+  margin: 0;
+  font-weight: 400;
+}
+.account-main-container > .main-box form > div.fields > .account-sub, .secure-sub, .address-sub, .address-btn {
+  flex: 0 0 25%;
+  max-width: 25%;
+  position: relative;
+  width: 100%;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+.secure-sub-btn, .profile-sub-btn, .address-sub-btn, .address-get-btn {
+  cursor: pointer;
+  letter-spacing: .5px;
+  margin-right: -0.5px;
+  color: #fff;
+  font-size: 0.85714286em;
+  font-weight: 700;
+  padding-left: 0;
+  padding-right: 0;
+  background: #4a90e2;
+  border-color: #4a90e2;
+  border-radius: 6px;
+  padding-top: 0.46428571em;
+  padding-bottom: 0.46428571em;
+  border: 1px solid #252525;
+  border-width: 1px;
+  line-height: 1.85714286em;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  display: inline-block;
+}
+.address-get-btn {
+  margin-top: 20px;
+}
+.address1_field > input, .address2_field > input {
+  width: 100%;
+}
+.box-top > svg {
+  color: black;
+  position: absolute;
+  top: 28%;
+  right: 33%;
+  cursor: pointer;
+}
+.profile-modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+.profile-modal > .profile-content {
+  background-color: #fefefe;
+  border: 1px solid #888;
+  width: 80%;
+}
+.dropzone {
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: radial-gradient(ellipse at center, #99E1D9 0, #008C96 100%);
+  width: 80%;
+  height: 50%;
+  border: 5px dashed white;
+  text-align: center;
+  color: white;
+  z-index: 20;
+  transition: all 0.3s ease-out;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.05), inset 0 0 0.25em 0 rgba(0, 0, 0, 0.25);
+}
+.dropzone .btnCompression .active {
+  background: #99E1D9;
+  color: white;
+}
+.dropzone i {
+  text-align: center;
+  font-size: 10em;
+  color: black;
+  margin-top: 50px;
+}
+.dropzone .selectFile {
+  height: 50px;
+  margin: 20px auto;
+  position: relative;
+  width: 200px;
+}
+.dropzone label,
+.dropzone input {
+  cursor: pointer;
+  display: block;
+  height: 50px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  border-radius: 5px;
+}
+.dropzone label {
+  background: white;
+  color: #008C96;
+  display: inline-block;
+  font-size: 1.2em;
+  line-height: 50px;
+  padding: 0;
+  text-align: center;
+  white-space: nowrap;
+  text-transform: uppercase;
+  font-weight: 400;
+  box-shadow: 0 1px 1px gray;
+}
+.dropzone input[type=file] {
+  opacity: 0;
+}
+.dropzone.in {
+  color: white;
+  border-color: white;
+  background: radial-gradient(ellipse at center, #99E1D9 0, #008C96 100%);
+}
+.dropzone.in i {
+  color: white;
+}
+.dropzone.in label {
+  background: #fff;
+  color: #99E1D9;
+}
+.dropzone.hover {
+  color: gray;
+  border-color: white;
+  background: white;
+  border: 5px dashed gray;
+}
+.dropzone.hover i {
+  color: #99E1D9;
+}
+.dropzone.hover label {
+  background: white;
+  color: #99E1D9;
+}
+.dropzone.fade {
+  transition: all 0.3s ease-out;
+  opacity: 1;
+}
+.mobile-display {
+  display: none;
+}
+@media (max-width: 864px) {
+  .container {
+    display: grid;
+    gap: 30px;
+    grid-template-columns: [col1-start] 1fr [col1-end col2-start] 7fr [col2-end col3-start] 1fr [col3-end];
+    grid-template-rows: [row1-start] 30px [row1-end row2-start] minmax(600px, auto) [row2-end row3-start] minmax(50px, auto) [row3-end];
+    grid-template-areas: 
+      "header header header"
+      "main main main"
+      "footer footer footer";
+  }
+  .account-nav-mobile {
+    grid-area: header;
+    background-color: white;
+    display: inline-flex;
+    justify-content: space-around;
+  }
+  .account-nav-mobile > a {
+    color: blue;
+    text-decoration: none;
+    margin: auto;
+  }
+  .account-settings {
+    display: block;
+  }
+  .sidebar-account {
+    max-width: initial;
+  }
+  .dropzone > div#dropZ > svg {
+    display: none;
+  }
+  .dropzone > div#dropZ > .desktop-display {
+    display: none;
+  }
+  .mobile-display {
+    display: block;
+  }
+  .account-main-container > .main-box form > div.fields input {
+    margin-left: 4px;
+  }
+  .address1_field > input, .address2_field > input {
+    width: initial;
+  }
+  .dropzone {
+    width: 100%;
+    height: 20%;
+  }
+}

@@ -1,0 +1,38 @@
+{% extends 'storefront/base.html' %}
+{% load static %}
+{% load cart_tags %}
+{% block css %}
+  <link href="{% static "account/css/login.css" %}" rel="stylesheet">
+{% endblock css %}
+{% block script %}
+{% endblock script %}
+{% block content %}
+  <div class="login-main">
+    <div class="login-box">
+      <form method="POST">
+        {% csrf_token %}
+        <div class="form-container">
+          <div class="form-head">
+            <a href="{% url 'storefront' %}"><i class="fas fa-home"></i></a>
+            <h3>Login</h3>
+          </div>
+          <div class="user-input fieldset">
+            <i class="fas fa-user"></i>
+            <input class="field-input" type="text" name="username" placeholder="Your username" required>
+          </div>
+          <div class="pass-input fieldset">
+            <i class="fas fa-key"></i>
+            <input class="field-input" type="password" name="password" placeholder="Your password" required>
+          </div>
+          <div class="captcha-input">
+            {{ form.captcha }}
+          </div>
+          <input class="login-btn" type="submit" value="Login">
+        </div>
+      </form>
+    </div>
+    <div class="message">
+      <span>Don't have an account? Sign up <a href="{% url 'register' %}">here</a></span>
+    </div>
+  </div>
+{% endblock content %}

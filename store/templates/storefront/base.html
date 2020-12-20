@@ -1,0 +1,93 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1"/>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="{% static "storefront/img/favicon.ico" %}" type="image/x-icon">
+    <title>Gadgets charm</title> 
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Cardo|PT+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static "storefront/css/base.css" %}">
+    <script src="{% static "storefront/js/bar.js" %}"></script>
+    <!--Logo-->
+    <link rel="stylesheet" href="{% static "fontawesome/css/all.css" %}">
+    <script src="{% static "fontawesome/js/all.js" %}"></script>
+    {% block css %}
+    {% endblock css %}
+    {% block script %}0
+    {% endblock script %}
+  </head>
+  <body>
+    <div class="container">
+        <nav class="navbar">
+          <div class="nav-top">
+            <a class="navbar-brand" href="{% url 'storefront' %}">Gadgets</a>
+            <form class="search-form" action="/">
+              <div class="text-search">
+                <input type="text" placeholder="Search" name="search">
+                <select name="cat">
+                  <option value=null>Any</option>
+                  <option value="1">Mobile Phone and accessories</option>
+                  <option value="2">Computers and accessories</option>
+                  <option value="3">Computer hardware</option>
+                </select>
+                <button type="submit"><i class="fas fa-search"></i></button>
+              </div>
+            </form>
+            <div class="nav-cart">
+              <button class="cart-btn btn">
+                <i class="fas fa-shopping-cart cart-icon fa-lg"></i>
+                <label class="CartCount"></label>
+              </button>
+            </div>
+            <div class="cart-container">
+              <div class="shopping-cart-header">
+                <div class="shopping-cart-total">
+                  <span class="lighter-text">Total:</span>
+                  <span class="total-cart"></span>
+                </div>
+              </div>
+              <div class="shopping-cart-items">
+              </div>
+              <button class="btn check-btn">Checkout</button>
+            </div>
+          </div>
+          <div class="nav-bot">
+            <div class="nav-links">
+              {% if user.is_authenticated %}
+                <div class="account-dropdown">
+                  <button class="account-btn btn">My account </button>
+                  <button class="drop-account btn">
+                    <div class="down-arrow"></div>
+                  </button>
+                  <div class="account-content">
+                    <a class="account-set btn" href="{% url 'account-info' %}">
+                      <i class="fas fa-cog account-icon"></i>Update Account Settings
+                    </a>
+                    <a class="logout-btn btn" href="{% url 'logout' %}">
+                      <i class="fas fa-sign-out-alt account-icon"></i>Logout
+                    </a>
+                  </div>
+                </div>
+              {% else %}
+                <a href="{% url 'login' %}">Login</a>
+                <a href="{% url 'register' %}">Sign up</a>
+              {% endif %}
+            </div>
+          </div>
+        </nav>
+        {% block content %}
+        {% endblock content %}
+        <footer class="footer">
+          <div class="copy-note">
+            <span>Copyright &#9400; Gagdets Charm</span>
+          </div>
+          <div class="social-icons">
+            <a><i class="fab fa-facebook fa-2x"></i></a>
+            <a><i class="fab fa-instagram fa-2x"></i></a>
+          </div>
+        </footer>
+    </div>
+  </body>
+</html>

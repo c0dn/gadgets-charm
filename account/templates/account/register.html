@@ -1,0 +1,54 @@
+{% extends 'storefront/base.html' %}
+{% load static %}
+{% load cart_tags %}
+{% block css %}
+  <link href="{% static "account/css/register.css" %}" rel="stylesheet">
+{% endblock css %}
+{% block script %}
+{% endblock script %}
+{% block content %}
+  <div class="register-main">
+    <div class="register-box">
+      <form method="POST">
+        {% csrf_token %}
+        <div class="form-container">
+          <div class="form-head">
+            <a href="{% url 'storefront' %}"><i class="fas fa-home"></i></a>
+            <h3>Sign Up</h3>
+          </div>
+          <div class="user-input fieldset">
+            <i class="fas fa-user"></i>
+            <input class="field-input" type="text" name="username" placeholder="Your username" required>
+          </div>
+          <div class="name1-input fieldset">
+            <i class="fas fa-address-card"></i>
+            <input class="field-input" type="text" name="first_name" placeholder="First Name" required>
+          </div>
+          <div class="name2-input fieldset">
+            <i class="fas fa-address-card"></i>
+            <input class="field-input" type="text" name="last_name" placeholder="Last Name" required>
+          </div>
+          <div class="email-input fieldset">
+            <i class="fas fa-envelope"></i>
+            <input class="field-input" type="email" name="email" placeholder="Email" required>
+          </div>
+          <div class="pass1-input fieldset">
+            <i class="fas fa-key"></i>
+            <input class="field-input" type="password" name="password1" placeholder="password" required>
+          </div>
+          <div class="pass2-input fieldset">
+            <i class="fas fa-key"></i>
+            <input class="field-input" type="password" name="password2" placeholder="Re-enter password again" required>
+          </div>
+          <div class="captcha-input">
+            {{ form.captcha }}
+          </div>
+          <input class="register-btn" type="submit" value="Sign Up">
+        </div>
+      </form>
+    </div>
+    <div class="message">
+      <span>Already have an account ? Login <a href="{% url 'login' %}">here</a></span>
+    </div>
+  </div>
+{% endblock content %}

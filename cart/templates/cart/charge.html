@@ -1,0 +1,14 @@
+{% extends 'storefront/base.html' %}
+{% load store_tags %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static "storefront/css/item.css" %}">
+{% endblock css %}
+{% block script %}
+    <script src="{% static "storefront/js/item.js" %}"></script>
+    <script src="{% static "storefront/js/store.js" %}"></script>
+{% endblock script %}
+{% block content %}
+    <p>Thank you. <strong>${{ total }}</strong> was charged to your card</p>
+    <p>Keep on a eye on your email for more information on your order</p>
+{% endblock content %}

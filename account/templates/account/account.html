@@ -1,0 +1,155 @@
+{% extends 'storefront/base.html' %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static "account/css/account.css" %}">
+{% endblock css %}
+{% block script %}
+    <script src="{% static "account/js/account.js" %}"></script>
+{% endblock script %}
+{% block content %}
+  <nav class="account-nav-mobile">
+    <a class="home-item" href="{% url 'storefront' %}">Home</a>
+    <a class="cart-item" href="{% url 'checkout-first' %}">My cart</a>
+    {% if user.is_authenticated %}
+      <a class="account-item" href="{% url 'account-info' %}">My account</a>
+    {% else %}
+      <a class="login-item" href="{% url 'login' %}">Login</a>
+      <a href="{% url 'register' %}" class="register-item">Sign Up</a>
+    {% endif %}
+  </nav>
+  <div class="account-container">
+    <div class="account-settings">
+      <div class="sidebar-account">
+        <div class="profile-box">
+          <div class="box-top">
+            <img class="round-account-img" src="{{ user.account.image.url }}">
+            <i class="fas fa-pencil-alt edit-btn" onclick="imagemodal()"></i>
+            <span class="username-account">{{ user.first_name }} {{ user.last_name }}</span>
+          </div>
+          <div class="profile-modal">
+              <div class="profile-content">
+                <form method="POST" action="change/image/" enctype="multipart/form-data" class="image-form">
+                  {% csrf_token %}
+                  <div class="dropzone">
+                    <div id="dropZ">
+                      <i class="fas fa-cloud-upload-alt fa-10x"></i>
+                      <div class="desktop-display">Drag and drop your image here</div>                    
+                      <span class="desktop-display">OR</span>
+                      <div class="mobile-display">Select your image file</div>
+                      <div class="selectFile">
+                        <label for="file">Select file</label>
+                        <input onchange="form.submit()" type="file" class="image-input" name="image" accept="image/*">
+                      </div>
+                      <p>File size limit : 5 MB</p>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          <hr>
+          <div class="box-menu-container">
+            <div class="box-menu">
+              <ul>
+                <li><a class="profile-link">Profile</a></li>
+                <li><a class="security-link">Security</a></li>
+                <li><a class="Address-link">Address Book</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="account-main-container">
+        <div class="main-box">
+          <div class="profile-settings">
+            <h4>Profile</h4>
+            <form method="POST" action="change/profile/">
+              {% csrf_token %}
+              <div class="fields">
+                <div class="first_name_field col-md-6">
+                  <label>First name</label>
+                  <input type="text" name="first_name" value="{{ u_form.first_name.value }}" maxlength="30">
+                </div>
+                <div class="last_name_field col-md-6">
+                  <label>Last Name</label>
+                  <input type="text" name="last_name" value="{{ u_form.last_name.value }}" maxlength="150">
+                </div>
+                <div class="username_field col-md-6">
+                  <label>Username</label>
+                  <input type="text" name="username" required value="{{ u_form.username.value }}">
+                </div>
+                <div class="email_field col-md-6">
+                  <label>Email</label>
+                  <input type="email" name="email" required value="{{ u_form.email.value }}">
+                </div>
+                <div class="profile-submit account-sub">
+                  <button type="submit" class="profile-sub-btn">Update Profile</button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="security-settings">
+            <h4>Security</h4>
+            <form method="POST" action="change/password/">
+              {% csrf_token %}
+              <div class="fields">
+                <div class="oldpass_field col-md-6">
+                  <label>Old Password</label>
+                  <input type="password" name="old_password" required>
+                </div>
+                <div class="newpass_field col-md-6">
+                  <label>New Password</label>
+                  <input type="password" name="new_password1" required>
+                </div>
+                <div class="newpasscon_field col-md-6">
+                  <label>Confirm New Password</label>
+                  <input type="password" name="new_password2" required>
+                </div>
+                <div class="security-submit secure-sub">
+                    <button type="submit" class="secure-sub-btn">Change Password</button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="Address-settings">
+            <h4>Address Book</h4>
+            <form method="POST" action="change/address/">
+              {% csrf_token %}
+              <div class="fields">
+                <div class="address1_field col-md-6">
+                  <label>Address Line 1</label>
+                  <input type="text" value="{{ a_form.street_address1.value }}" name="street_address1" maxlength="255" placeholder="Street name, Building name">
+                </div>
+                <div class="address2_field col-md-6">
+                  <label>Address Line 2</label>
+                  <input type="text" value="{{ a_form.street_address2.value }}" name="street_address2" maxlength="255" placeholder="unit number etc.">
+                </div>
+                <div class="zip_field col-md-6">
+                  <label>Zip Code</label>
+                  <input type="text" value="{{ a_form.Zip_code.value }}" name="Zip_code" maxlength="6" placeholder="6 digit code">
+                </div>
+                <div class="city_field col-md-6">
+                  <label>City</label>
+                  <input type="text" value="{{ a_form.city.value }}" maxlength="255" name="city">
+                </div>
+                <div class="state_field col-md-6">
+                  <label>State</label>
+                  <input type="text" value="{{ a_form.state.value }}" name="state" maxlength="255">
+                </div>
+                <div class="phone_field col-md-6">
+                  <label>Contact number</label>
+                  <input type="text" value="{{ a_form.phone.value }}" name="phone">
+                </div>
+                <div class="address-submit address-sub">
+                    <button type="submit" class="address-sub-btn">Update Shipping Address</button>
+                </div>
+              </div>
+            </form>
+            <div class="address-btn">
+              <button class="address-get-btn">Auto Fill shipping address</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

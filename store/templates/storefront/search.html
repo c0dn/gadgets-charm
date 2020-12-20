@@ -1,0 +1,111 @@
+{% extends 'storefront/base.html' %}
+{% load static %}
+{% load store_tags %}
+{% block css %}
+  <link href="{% static "storefront/css/search.css" %}" rel="stylesheet">
+{% endblock css %}
+{% block script %}
+  <script src="{% static "storefront/js/search.js" %}" type="text/javascript"></script>
+{% endblock script %}
+{% block content %}
+  <nav class="search-nav">
+    <div class="search-greet">
+      {% if user.is_authenticated %}
+       <span>Hi! {{ user.first_name }} {{ user.last_name }} <a href="{% url 'logout' %}">Sign out</a></span>
+      {% else %}
+        <span>Hi! Please <a href="{% url 'login' %}">Login</a> or <a href="{% url 'register' %}">Sign up</a></span> 
+      {% endif %}
+    </div>
+    <a class="home-search" href="{% url 'storefront' %}">Home</a>
+    <div class="nav-search-right">
+      <a class="cart-search" href="{% url 'checkout-first' %}">My cart</a>
+      {% if user.is_authenticated %}
+        <a class="account-search" href="{% url 'account-info' %}">My account</a>
+      {% endif %}
+    </div>
+  </nav>
+  <nav class="search-nav-mobile">
+      <a class="home-item" href="{% url 'storefront' %}">Home</a>
+      <a class="cart-item">My cart</a>
+    {% if user.is_authenticated %}
+      <a class="account-item" href="{% url 'account-info' %}">My account</a>
+    {% else %}
+      <a class="login-item" href="{% url 'login' %}">Login</a>
+      <a href="{% url 'register' %}" class="register-item">Sign Up</a>
+    {% endif %}
+  </nav>
+  <div class="search-header">
+    <form class="search-form" action="/">
+      <div class="text-search">
+        <input type="hidden" value="search" name="from">
+        {% if search %}
+          <input type="text" placeholder="Search" name="search" value="{{ search }}">
+        {% else %}
+          <input type="text" placeholder="Search" name="search">
+        {% endif %}
+        <select name="cat">
+          {% if cat %}
+            <option value=null>Any</option>
+            {% ifequal cat "1" %}
+              <option value="1" selected>Mobile Phone and accessories</option>
+            {% else %}
+              <option value="1">Mobile Phone and accessories</option>
+            {% endifequal %}
+            {% ifequal cat "2" %}
+              <option value="2" selected>Computers and accessories</option>
+            {% else %}
+              <option value="2">Computers and accessories</option>
+            {% endifequal %}
+            {% ifequal cat "3" %}
+              <option value="3" selected>Computer hardware</option>
+            {% else %}
+              <option value="3">Computer hardware</option>
+            {% endifequal %}
+          {% else %}
+            <option value=null>Any</option>
+            <option value="1">Mobile Phone and accessories</option>
+            <option value="2">Computers and accessories</option>
+            <option value="3">Computer hardware</option>
+          {% endif %}
+        </select>
+        <button type="submit"><i class="fas fa-search"></i></button>
+      </div>
+    </form>
+  </div>
+  <div class="search-content">
+    {% if category %}
+      {% ifequal category "1" %}
+        <span>Showing all mobile Phone and accessories</span>
+      {% else %}
+        {% ifequal category "2" %}
+          <span>Showing all computers and accessories</span>
+        {% else %}
+          <span>Showing all computer hardware</span>
+        {% endifequal %}
+      {% endifequal %}
+    {% else %}
+      {% if branded %}
+        <span>Showing products from {{ branded }}</span>
+      {% else %}
+        {% if all %}
+          <span>All Items</span>
+        {% else %}
+          <span>Search results</span>
+        {% endif %}
+      {% endif %}
+    {% endif %}
+    <div class="content-wrapper">
+      {% for product in products %}
+        <div class="item-row">
+          <div class="img-thumb-wrapper">
+            <img class="img" alt="{{ product.item }} pic" src="{{ product.img1.url }}">
+          </div>
+          <span class="item-title">{{ product.item }}</span>
+          <span class="item-desc">{{ product.desc }}</span>
+          <span class="item-price">${{ product.unit_price }}</span>
+          <a style="color: #595959; text-decoration: none" href="{% url 'product-info' product.id %}"></a>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock content %}

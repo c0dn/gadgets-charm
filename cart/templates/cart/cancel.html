@@ -1,0 +1,23 @@
+{% extends 'storefront/base.html' %}
+{% load static %}
+{% load cart_tags %}
+{% block css %}
+  <link href="{% static "cart/css/cancel.css" %}" rel="stylesheet">
+{% endblock css %}
+{% block script %}
+{% endblock script %}
+{% block content %}
+  <nav class="cancel-nav-mobile">
+    <a class="home-item" href="{% url 'storefront' %}">Home</a>
+    <a class="cart-item">My cart</a>
+    {% if user.is_authenticated %}
+      <a class="account-item" href="{% url 'account-info' %}">My account</a>
+    {% else %}
+      <a class="login-item" href="{% url 'login' %}">Login</a>
+      <a href="{% url 'register' %}" class="register-item">Sign Up</a>
+    {% endif %}
+  </nav>
+  <div class="message">
+    <span>Your purchase was canceled</span>
+  </div>
+{% endblock content %}
