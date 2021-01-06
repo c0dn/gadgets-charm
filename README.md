@@ -40,6 +40,7 @@ Stripe API is integrated into the app to allow processing of credit card.
 2. Activate virtual environment
 3. Enter the command `pip install -r requirements.txt` to install the packages needed for the app
 4. Run the application using the command in `python manage.py runsslserver`
+5. Access the app at https://127.0.0.1:8000
 
 * Default Credentials :
   * Username : demo_user
